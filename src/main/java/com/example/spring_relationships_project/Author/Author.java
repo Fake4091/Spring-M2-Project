@@ -1,9 +1,9 @@
 package com.example.spring_relationships_project.Author;
 
 import com.example.spring_relationships_project.Book.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +22,8 @@ public class Author {
   )
   private Long id;
   private String name;
-  private LocalDate birthDate;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(
       name = "books_written",
@@ -48,14 +48,6 @@ public class Author {
     this.name = name;
   }
 
-  public LocalDate getBirthDate() {
-    return birthDate;
-  }
-
-  public void setBirthDate(LocalDate birthDate) {
-    this.birthDate = birthDate;
-  }
-
   public Set<Book> getBooksWritten() {
     return booksWritten;
   }
@@ -64,12 +56,19 @@ public class Author {
     this.booksWritten = booksWritten;
   }
 
+  public void addBook(Book book) {
+    booksWritten.add(book);
+  }
+
+  public void removeBook(Book book) {
+    booksWritten.remove(book);
+  }
+
   @Override
   public String toString() {
     return "Author{" +
         "id=" + id +
         ", name='" + name + '\'' +
-        ", birthDate=" + birthDate +
         ", booksWritten=" + booksWritten +
         '}';
   }

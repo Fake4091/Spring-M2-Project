@@ -62,10 +62,6 @@ public class Book {
     this.title = title;
   }
 
-  public Set<Author> getAuthor() {
-    return authors;
-  }
-
   public void addAuthor(Author author) {
     this.authors.add(author);
   }

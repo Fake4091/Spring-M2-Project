@@ -1,5 +1,6 @@
 package com.example.spring_relationships_project.Book;
 
+import com.example.spring_relationships_project.Author.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,12 @@ public class BookController {
   public void addNewBook(@RequestBody Book book) {
     bookService.addNewBook(book);
   }
+
+  @PutMapping(path="author/add/{bookId}/{authorId}")
+  public void addAuthor(@PathVariable Long bookId, @PathVariable Long authorId) { bookService.addAuthor(bookId, authorId); }
+
+  @PutMapping(path="author/remove/{bookId}/{authorId}")
+  public void removeAuthor(@PathVariable Long bookId, @PathVariable Long authorId) { bookService.removeAuthor(bookId, authorId); }
 
   @PutMapping(path = "borrow/{bookId}")
   public Book borrowBook(@PathVariable("bookId") Long bookId, @RequestBody Long borrowerId) {
